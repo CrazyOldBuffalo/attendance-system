@@ -1,0 +1,13 @@
+@use "../../resources/styles/Variables.scss";
+@import "~bootstrap/scss/bootstrap";
+
+
+.login-wrapper {
+
+    .mb-3 {
+        padding: 15px;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
