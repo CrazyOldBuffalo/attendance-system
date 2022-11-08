@@ -1,2 +1,12 @@
-@use '../../resources/styles/Variables.scss';
+@use 'Variables.scss';
 @import "~bootstrap/scss/bootstrap";
+
+.body{
+
+    //background-color: Variables.$Colour1;
+        
+    
+    background-color: red;
+
+
+}
