@@ -1,24 +1,37 @@
-// Variables for mongoose, etc.
-const mongoose = require("mongoose");
-const port = process.env.PORT || 5000;
-const bodyParser = require('body-parser');
-var express = require('express');
-var dbConn = require('./config/config');
-var User = require('./models/UserSchema');
-var UserRouter = require('./routes/UserRoutes');
-var app = express();
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+const db = require("./models");
+
+app.use(cors());
+
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+db.mongoose.connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Connected to DB");
+}).catch(err => {
+    console.log("error connecting to db");
+    process.exit();
+});
+
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
 
 
-// For running the server connection
-server().catch(err => console.log(err));
-app.use("/", UserRouter);
+require("./routes/user.routes")(app);
 
-// For connecting to the local DB
-async function server() {
-    console.log("connecting to db");
-    await mongoose.connect(dbConn.url, {useNewUrlParser: true, useUnifiedTopology: true});
-    console.log("connection success");
-    app.use('/Accounts', UserRouter);
-}
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
 
-module.exports = app;
