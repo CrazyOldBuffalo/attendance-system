@@ -1,6 +1,7 @@
 // Variables for mongoose, etc.
 const mongoose = require("mongoose");
 var db = require('./config/config');
+var User = require('./models/UserSchema');
 
 // For future use when we seperate the models and everything.
 //const usermodel = require("./models/userModel");
@@ -13,19 +14,11 @@ server().catch(err => console.log(err));
 async function server() {
     console.log("connecting to db");
     await mongoose.connect(db.url);
-    console.log("connection success")
-
+    console.log("connection success");
 
     // Test script to create a model and schema in mongo
-    const User = new mongoose.model("User", mongoose.Schema(
-        {
-            username: String,
-            password: String
-        })
-    );
-    
     // Test to create a new user object on the above model/schema
-    const test = new User({ username: "Tom", password: "pass"});
+    const test = new User({ username: "model", password: "success"});
 
     // Test to save the above object to the db and then call it back (it will add more each time you run this script)
     await test.save();
