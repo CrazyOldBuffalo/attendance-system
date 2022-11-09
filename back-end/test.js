@@ -1,9 +1,9 @@
 // Variables for mongoose, etc.
-const db = require('./config/connection');
 const mongoose = require("mongoose");
+var db = require('./config/config');
 
 // For future use when we seperate the models and everything.
-const usermodel = require("./models/userModel");
+//const usermodel = require("./models/userModel");
 
 // For running the server connection
 server().catch(err => console.log(err));
@@ -12,7 +12,7 @@ server().catch(err => console.log(err));
 // For connecting to the local DB
 async function server() {
     console.log("connecting to db");
-    await mongoose.connect(db);
+    await mongoose.connect(db.url);
     console.log("connection success")
 
 
