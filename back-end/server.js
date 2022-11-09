@@ -11,7 +11,7 @@ var app = express();
 
 // For running the server connection
 server().catch(err => console.log(err));
-
+app.use("/", UserRouter);
 
 // For connecting to the local DB
 async function server() {
