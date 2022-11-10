@@ -15,5 +15,6 @@ db.mongoose = mongoose;
 db.url = dbconfig.url;
 db.port = dbconfig.port;
 db.users = require("./user.model")(mongoose);
+db.tutors = require("./tutor.model")(mongoose);
 
 module.exports = db;

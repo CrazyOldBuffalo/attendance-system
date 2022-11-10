@@ -28,10 +28,29 @@ var corsOptions = {
 
 // Sets the app to use the Routes for the api
 require("./routes/user.routes")(app);
+require("./routes/tutor.routes")(app);
+
+const User = db.users;
+const Tutor = db.tutors;
+
+async function createuserTutor() {
+  const user = new User({
+    username: "Tom",
+    password: "password"
+  });
+  var result = await user.save();
+  console.log(result);
+  var tutor = new Tutor ({
+    user: user
+  });
+  var tresult = await tutor.save();
+  console.log(tresult);
+} 
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
 app.listen(db.port, () => {
+  createuserTutor();
   console.log(`Server is running on port ${db.port}.`);
 });
 
