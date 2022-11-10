@@ -1,17 +1,16 @@
+// Modules and Libraries required for the server to run
+// Inclusion of other modules from within the app
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
 const db = require("./models");
 
+//Defining express to use cors, json and the urlencoded setting
 app.use(cors());
-
-// parse requests of content-type - application/json
 app.use(express.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+//Connects to the db and confirms connection
 db.mongoose.connect(db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -22,11 +21,12 @@ db.mongoose.connect(db.url, {
     process.exit();
 });
 
+//sets the origin of CORS
 var corsOptions = {
   origin: "http://localhost:8081"
 };
 
-
+// Sets the app to use the Routes for the api
 require("./routes/user.routes")(app);
 
 // set port, listen for requests
