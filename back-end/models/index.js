@@ -1,3 +1,10 @@
+// File containing important info such as the db connection url
+// that it requires mongoose
+// sets the variable db to be an array ({}) filled with
+// mongoose, the db url and the model in user.model as users
+// exports this for use in server
+
+
 const dbconfig = require("../config/db.config");
 
 const mongoose = require('mongoose');
