@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 const db = {};
 db.mongoose = mongoose;
 db.url = dbconfig.url;
+db.port = dbconfig.port;
 db.users = require("./user.model")(mongoose);
 
 module.exports = db;
