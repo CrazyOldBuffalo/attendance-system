@@ -16,5 +16,7 @@ db.url = dbconfig.url;
 db.port = dbconfig.port;
 db.users = require("./user.model")(mongoose);
 db.tutors = require("./tutor.model")(mongoose);
+db.students = require("./student.model")(mongoose);
+db.academicAdvisors = require("./academicadvisor.model")(mongoose);
 
 module.exports = db;

@@ -1,18 +1,14 @@
 module.exports = mongoose => {
-    var Tutor = mongoose.model(
-        "tutor",
+    var AcademicAdvisor = mongoose.model(
+        "academicAdvisor",
         mongoose.Schema(
             {
                 user: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User"
                 },
-                canEditModule: {
-                    type: Boolean,
-                    required: true
-                }
             }
         )
     );
-    return Tutor;
+    return AcademicAdvisor;
 };
