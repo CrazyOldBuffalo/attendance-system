@@ -18,7 +18,7 @@ exports.create = (req, res) => {
   .then(data => {
     res.send(data);
   })
-}
+};
 
 // Retrieve all Tutorials from the database.
 exports.findOne = (req, res) => {

@@ -3,14 +3,16 @@ module.exports = mongoose => {
         "tutor",
         mongoose.Schema(
             {
-                user: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "User"
+                tutorId: {
+                    type: String,
+                    required: true,
+                    unique: true
                 },
-                canEditModule: {
-                    type: Boolean,
+                userRef: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User",
                     required: true
-                }
+                },
             }
         )
     );
