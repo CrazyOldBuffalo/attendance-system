@@ -1,11 +1,9 @@
-const Student = require("./student.model");
-
 module.exports = mongoose => {
     var AcademicAdvisor = mongoose.model(
         "academicAdvisor",
         mongoose.Schema(
             {
-                user: {
+                userRef: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User"
                 },
