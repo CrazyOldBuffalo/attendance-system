@@ -11,7 +11,9 @@ exports.create = (req, res) => {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    telephone: req.body.tel ? req.body.tel: "0"
+    telephone: req.body.tel ? req.body.tel: "0",
+    canEditModule: false,
+    canEditCourse: false
   });
 
   user.save(user)

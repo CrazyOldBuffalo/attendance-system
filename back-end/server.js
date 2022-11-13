@@ -30,6 +30,7 @@ var corsOptions = {
 require("./routes/user.routes")(app);
 require("./routes/tutor.routes")(app);
 require("./routes/academicadvisor.routes")(app);
+require("./routes/moduleleader.routes")(app);
 
 
 // Creates objects as test data to populate the db
@@ -37,8 +38,7 @@ async function createUsers() {
 
 } 
 
-// set port, listen for requests
-const PORT = process.env.PORT || 5000;
+// listen for requests
 app.listen(db.port, () => {
   createUsers();
   console.log(`Server is running on port ${db.port}.`);

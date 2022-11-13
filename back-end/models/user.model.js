@@ -24,6 +24,14 @@ module.exports = mongoose => {
                 },
                 telephone: {
                     type: String
+                },
+                canEditModule: {
+                    type: Boolean,
+                    required: true,
+                },
+                canEditCourse: {
+                    type: Boolean,
+                    required: true,
                 }
             },
         )
