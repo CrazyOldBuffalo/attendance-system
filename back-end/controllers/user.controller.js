@@ -6,11 +6,24 @@
 const db = require("../models");
 const User = db.users;
 
+exports.create = (req, res) => {
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    telephone: req.body.tel ? req.body.tel: "0"
+  });
+
+  user.save(user)
+  .then(data => {
+    res.send(data);
+  })
+}
+
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
-  const username = req.query.username;
-  var condition = username ? { username: {$regex: new RegExp(username), $options: "i"} } : {};
-  User.find(condition).then(data => {
+exports.findOne = (req, res) => {
+  const findUser = req.body.username;
+  User.find({username: findUser}).then(data => {
     res.send(data);
   })
     .catch(err => {
@@ -22,8 +35,11 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single Tutorial with an id
-exports.findOne = (req, res) => {
-  
+exports.findAll = (req, res) => {
+  User.find().then(data => {
+    res.send(data);
+  });
+
 };
 
 // // Update a Tutorial by the id in the request

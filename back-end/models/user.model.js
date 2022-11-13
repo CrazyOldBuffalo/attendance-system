@@ -20,8 +20,11 @@ module.exports = mongoose => {
                 },
                 email: {
                     type: String,
-                    required: true,
+                    required: true
                 },
+                telephone: {
+                    type: String
+                }
             },
         )
     );
