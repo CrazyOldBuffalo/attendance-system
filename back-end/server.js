@@ -35,9 +35,54 @@ require("./routes/courseleader.routes")(app);
 
 
 // Creates objects as test data to populate the db
+const User = db.users;
+const Student = db.students;
+const AcademicAdvisor = db.academicAdvisors;
 async function createUsers() {
+  const user1 = new User({
+    "username": "Ollie",
+    "password": "password",
+    "email": "test",
+    "telephone": "0123356",
+    "canEditModule": false,
+    "canEditCourse": false
+  });
+  const user2 = new User({
+    "username": "Reuben",
+    "password": "password",
+    "email": "test",
+    "telephone": "0123356",
+    "canEditModule": false,
+    "canEditCourse": false
+  });
+  const user3 = new User({
+    "username": "Tom",
+    "password": "password",
+    "email": "test",
+    "telephone": "0123356",
+    "canEditModule": false,
+    "canEditCourse": false
+  })
 
-} 
+  user1.save(user1);
+  user2.save(user2);
+  user3.save(user3);
+  const student = new Student({
+    studentID: "SU123",
+    user: user1
+  });
+  const student2 = new Student({
+    studentID: "SU223",
+    user: user3
+  });
+  student.save(student);
+  student2.save(student2);
+  const academicadvisor = new AcademicAdvisor({
+    user: user2,
+    students: [student, student2]
+  });
+  academicadvisor.save(academicadvisor);
+}
 
 // listen for requests
 app.listen(db.port, () => {

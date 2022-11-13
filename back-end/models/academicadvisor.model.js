@@ -3,10 +3,14 @@ module.exports = mongoose => {
         "academicAdvisor",
         mongoose.Schema(
             {
-                user: {
+                userRef: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User"
                 },
+                students: [{
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Student"
+                }]
             }
         )
     );

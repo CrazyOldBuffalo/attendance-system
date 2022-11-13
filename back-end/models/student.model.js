@@ -7,15 +7,7 @@ module.exports = mongoose => {
                     type: String,
                     unique: true
                 },
-                course: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "Course"
-                },
-                academicAdvisor: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "AcademicAdvisor"
-                },
-                user: {
+                userRef: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User"
                 },
