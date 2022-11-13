@@ -1,20 +1,20 @@
 module.exports = mongoose => {
-    var Tutor = mongoose.model(
-        "tutor",
+    var CourseLeader = mongoose.model(
+        "courseleader",
         mongoose.Schema(
             {
-                tutorId: {
-                    type: String,
-                    required: true,
-                    unique: true
-                },
                 userRef: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User",
                     required: true
                 },
+                tutorRef: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref:"Tutor",
+                    required: true
+                }
             }
         )
     );
-    return Tutor;
+    return CourseLeader;
 };

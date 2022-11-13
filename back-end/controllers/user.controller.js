@@ -6,37 +6,26 @@
 const db = require("../models");
 const User = db.users;
 
-// exports this for use in routes
-// req = request, res = response
-exports.create = (req, res) =>  {
-    // checks if the body of the request contains filled fields (username and password fe)
-    if (!req.body.username ) {
-        res.status(400).send({message: "request empty"});
-        return;
-    }
-    // creates a new user obj using the data in the request body with the tag of username & password
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-    });
+exports.create = (req, res) => {
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    telephone: req.body.tel ? req.body.tel: "0",
+    canEditModule: false,
+    canEditCourse: false
+  });
 
-    // saves the obj of user in the db & throws an error if this fails
-    user.save(user)
-        .then( data => {
-            res.send(data);
-        }).catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Error creating object"
-            });
-        });
+  user.save(user)
+  .then(data => {
+    res.send(data);
+  })
 };
 
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
-  const username = req.query.username;
-  var condition = username ? { username: {$regex: new RegExp(username), $options: "i"} } : {};
-  User.find(condition).then(data => {
+exports.findOne = (req, res) => {
+  const findUser = req.body.username;
+  User.find({username: findUser}).then(data => {
     res.send(data);
   })
     .catch(err => {
@@ -47,10 +36,13 @@ exports.findAll = (req, res) => {
     });
 };
 
-// // Find a single Tutorial with an id
-// exports.findOne = (req, res) => {
-  
-// };
+// Find a single Tutorial with an id
+exports.findAll = (req, res) => {
+  User.find().then(data => {
+    res.send(data);
+  });
+
+};
 
 // // Update a Tutorial by the id in the request
 // exports.update = (req, res) => {

@@ -17,6 +17,21 @@ module.exports = mongoose => {
                 password: {
                     type: String,
                     required: true
+                },
+                email: {
+                    type: String,
+                    required: true
+                },
+                telephone: {
+                    type: String
+                },
+                canEditModule: {
+                    type: Boolean,
+                    required: true,
+                },
+                canEditCourse: {
+                    type: Boolean,
+                    required: true,
                 }
             },
         )

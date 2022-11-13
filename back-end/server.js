@@ -29,28 +29,19 @@ var corsOptions = {
 // Sets the app to use the Routes for the api
 require("./routes/user.routes")(app);
 require("./routes/tutor.routes")(app);
+require("./routes/academicadvisor.routes")(app);
+require("./routes/moduleleader.routes")(app);
+require("./routes/courseleader.routes")(app);
 
-const User = db.users;
-const Tutor = db.tutors;
 
-async function createuserTutor() {
-  const user = new User({
-    username: "Tom",
-    password: "password"
-  });
-  var result = await user.save();
-  console.log(result);
-  var tutor = new Tutor ({
-    user: user
-  });
-  var tresult = await tutor.save();
-  console.log(tresult);
+// Creates objects as test data to populate the db
+async function createUsers() {
+
 } 
 
-// set port, listen for requests
-const PORT = process.env.PORT || 5000;
+// listen for requests
 app.listen(db.port, () => {
-  createuserTutor();
+  createUsers();
   console.log(`Server is running on port ${db.port}.`);
 });
 
