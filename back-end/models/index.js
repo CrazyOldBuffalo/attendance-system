@@ -22,11 +22,11 @@ db.tutors = require("./tutor.model")(mongoose);
 db.moduleLeaders = require("./moduleleader.model")(mongoose);
 db.courseLeaders = require("./courseleader.model")(mongoose);
 db.students = require("./student.model")(mongoose);
-db.academicAdvisors = require("./academicadvisor.model")(mongoose);
 
 // Course and attendance models
 db.courses = require("./course.model")(mongoose);
 db.modules = require("./module.model")(mongoose);
 db.classes = require("./class.model")(mongoose);
+db.registers = require("./register.model")(mongoose);
 
 module.exports = db;

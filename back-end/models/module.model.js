@@ -6,7 +6,6 @@ module.exports = mongoose => {
                 moduleName: {
                     type: String,
                     required: true,
-                    unique: true
                 },
                 moduleID: {
                     type: String,

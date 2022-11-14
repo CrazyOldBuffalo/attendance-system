@@ -22,11 +22,11 @@ module.exports = mongoose => {
                     ref: "Tutor",
                     required: true
                 },
-                register: [{
+                register: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Register",
                     required: true
-                }]
+                }
             }
         )
     );
