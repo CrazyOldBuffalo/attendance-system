@@ -3,16 +3,11 @@ module.exports = mongoose => {
         "courseleader",
         mongoose.Schema(
             {
-                userRef: {
+                moduleLeaderRef: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "User",
+                    ref:"ModuleLeader",
                     required: true
                 },
-                tutorRef: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref:"Tutor",
-                    required: true
-                }
             }
         )
     );
