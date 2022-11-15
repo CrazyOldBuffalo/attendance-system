@@ -31,6 +31,8 @@ require("./routes/user.routes")(app);
 require("./routes/tutor.routes")(app);
 require("./routes/moduleleader.routes")(app);
 require("./routes/courseleader.routes")(app);
+require("./routes/class.routes")(app);
+require("./routes/register.routes")(app);
 
 
 // Creates objects as test data to populate the db
@@ -83,7 +85,7 @@ async function createUsers() {
   user3.save(user3);
   user4.save(user4);
   const student = new Student({
-    studentIdD: "SU123",
+    studentID: "SU123",
     userRef: user4
   });
 

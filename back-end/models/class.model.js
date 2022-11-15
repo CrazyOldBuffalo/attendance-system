@@ -15,12 +15,10 @@ module.exports = mongoose => {
                 students: [{
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Student",
-                    required: true
                 }],
                 tutorRef: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Tutor",
-                    required: true
                 },
                 register: {
                     type: mongoose.Schema.Types.ObjectId,
