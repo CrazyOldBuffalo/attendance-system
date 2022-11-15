@@ -1,6 +1,6 @@
 module.exports = mongoose => {
-    var AcademicAdvisor = mongoose.model(
-        "academicAdvisor",
+    var Register = mongoose.model(
+        "register",
         mongoose.Schema(
             {
                 dateTime: {
@@ -20,5 +20,5 @@ module.exports = mongoose => {
             }
         )
     );
-    return AcademicAdvisor;
+    return Register;
 };
