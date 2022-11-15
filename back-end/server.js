@@ -119,7 +119,7 @@ async function createUsers() {
 
   courseleader.save(courseleader);
 
-  const register = new Register({
+  const register1 = new Register({
     dateTime: 2022-11-14,
     attendanceList: [{
       students: student,
@@ -127,14 +127,14 @@ async function createUsers() {
     }]
   });
 
-  register.save(register);
+  register1.save(register1);
 
   const class1 = new Class({
     classID: "CL123",
     className: "Security",
     students: [student],
     tutorRef: tutor1,
-    register: register
+    register: register1
   });
 
   class1.save(class1);
@@ -164,6 +164,7 @@ async function createUsers() {
 // listen for requests
 app.listen(db.port, () => {
   createUsers();
+  
   console.log(`Server is running on port ${db.port}.`);
 });
 
