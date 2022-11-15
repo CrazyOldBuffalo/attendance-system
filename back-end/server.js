@@ -31,6 +31,7 @@ require("./routes/user.routes")(app);
 require("./routes/tutor.routes")(app);
 require("./routes/moduleleader.routes")(app);
 require("./routes/courseleader.routes")(app);
+require("./routes/class.routes")(app);
 
 
 // Creates objects as test data to populate the db

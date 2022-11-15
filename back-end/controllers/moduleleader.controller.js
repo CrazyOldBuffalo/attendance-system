@@ -10,7 +10,7 @@ exports.create = (req, res) => {
         password: req.body.password,
         email: req.body.email,
         telephone: req.body.telephone ? req.body.telephone: "0",
-        canEditModule: edit,
+        canEditModule: true,
         canEditCourse: false,
     });
 
