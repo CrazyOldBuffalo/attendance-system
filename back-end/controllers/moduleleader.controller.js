@@ -1,15 +1,17 @@
 const db = require("../models");
 const User = db.users;
 const Tutor = db.tutors;
+const ModuleLeader = db.moduleLeaders;
 
 exports.create = (req, res) => {
+    const edit = true;
     const user = new User({
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        telephone: req.body.telephone,
-        canEditModule: false,
-        canEditCourse: false
+        telephone: req.body.telephone ? req.body.telephone: "0",
+        canEditModule: edit,
+        canEditCourse: false,
     });
 
     user.save(user);
@@ -19,25 +21,19 @@ exports.create = (req, res) => {
         userRef: user
     });
 
-    tutor.save(tutor).then(data => {
+    tutor.save(tutor);
+
+    const moduleleader = new ModuleLeader({
+        userRef: user,
+        tutorRef: tutor
+    });
+
+    moduleleader.save(moduleleader).then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
             message:
-                err.message || "unable to send to Tutor DB"
+                err.message || "Unable to submit to module leader DB"
         });
-    });
-};
-
-exports.findAll = (req, res) => {
-    Tutor.find().then(data => {
-        res.send(data);
-    });
-};
-
-exports.findOne = (req, res) => {
-    const findTutor = req.body.tutor;
-    Tutor.find({ tutorId: findTutor }).then(data => {
-        res.send(data)
     });
 };
