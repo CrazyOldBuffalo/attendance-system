@@ -28,5 +28,6 @@ db.courses = require("./course.model")(mongoose);
 db.modules = require("./module.model")(mongoose);
 db.classes = require("./class.model")(mongoose);
 db.registers = require("./register.model")(mongoose);
+db.registerItem = require("./registeritem.model")(mongoose);
 
 module.exports = db;

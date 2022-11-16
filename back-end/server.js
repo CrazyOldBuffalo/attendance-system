@@ -45,6 +45,7 @@ const Module = db.modules;
 const Course = db.courses;
 const Class = db.classes;
 const Register = db.registers;
+const RegisterItem = db.registerItem;
 
 async function createUsers() {
   const user1 = new User({
@@ -120,23 +121,24 @@ async function createUsers() {
   });
 
   courseleader.save(courseleader);
+  const regitem1 = new RegisterItem({
+    students: student,
+    attended: true
+  });
+  regitem1.save(regitem1);
 
-  const register1 = new Register({
-    dateTime: 2022-11-14,
-    attendanceList: [{
-      students: student,
-      attendanceStatus: true
-    }]
+  const register = new Register({
+    dateTime: 2022-11-16,
+    attendanceList: [regitem1]
   });
 
-  register1.save(register1);
-
+  register.save(register);
   const class1 = new Class({
     classID: "CL123",
     className: "Security",
     students: [student],
     tutorRef: tutor1,
-    register: register1
+    register: register
   });
 
   class1.save(class1);

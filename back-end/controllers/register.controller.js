@@ -1,5 +1,6 @@
 // Display the register for that class
 // Edit, Create and Delete register item
+const { registerItem } = require("../models");
 const db = require("../models");
 
 const Register = db.registers;
@@ -12,5 +13,14 @@ exports.MarkAbsent= (req, res, next) => {
     const findStudent = req.query.student;
     const student = Student.findOne({studentID: findStudent});
     
-    
+    const query = Class.findOne({classID: findClass}).populate({
+        path: "register", 
+        model:"register",
+        populate: {
+            path: "attendanceList",
+            model: "registerItem"
+        }
+    }).then(data => {
+        res.send(data);
+    })
 };
