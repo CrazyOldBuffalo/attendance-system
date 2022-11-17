@@ -121,20 +121,6 @@ async function createUsers() {
   tutor2.save(tutor2);
   tutor3.save(tutor3);
 
-  const moduleleader1 = new ModuleLeader({
-    tutorRef: tutor2
-  });
-  const moduleleader2 = new ModuleLeader({
-    tutorRef: tutor3
-  });
-  moduleleader1.save(moduleleader1);
-  moduleleader2.save(moduleleader2);
-
-  const courseleader = new CourseLeader({
-    moduleLeaderRef: moduleleader1
-  });
-
-  courseleader.save(courseleader);
   const regitem1 = new RegisterItem({
     students: student,
     attended: true
@@ -167,7 +153,7 @@ async function createUsers() {
     moduleName: "SAD :(",
     moduleID: "MD123",
     students: student,
-    moduleLeader: moduleleader1,
+    moduleLeader: tutor1,
     classes: [class1],
     tutors: [tutor1, tutor2]
   });
@@ -178,7 +164,7 @@ async function createUsers() {
     courseName: "Software Engineering bENG",
     courseID: "SE123",
     students: [student],
-    courseLeader: courseleader,
+    courseLeader: tutor3,
     modules: [module]
   });
 

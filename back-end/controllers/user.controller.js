@@ -44,10 +44,18 @@ exports.findAllUsers = (res) => {
   });
 };
 
-exports.updateUserPassword = async (req, res) => {
-  var filter = req.body.user;
-  var userid = this.findOneUser(filter);
-  console.log(userid._id);
+exports.updateUserPassword = async(req, res) => {
+  if(!req.body){return res.status(400).send({message: "No Request Data Sent"})};
+  if(req.body.password.length < 5) {return res.status(400).send({message: "Password is not long enough"})};
+  if(!User.findOne({username: req.body.username})) {return res.status(400).send({message: "User is not found"})};
+
+
+  const userdata = await User.findOne({username: req.body.username});
+
+  console.log(userdata._id);
+  User.findByIdAndUpdate(userdata._id, {password: req.body.password}).then(data => {
+    res.send(data);
+  });
 };
 
 exports.updateUserTel = (req, res) => {
