@@ -46,6 +46,7 @@ const Course = db.courses;
 const Class = db.classes;
 const Register = db.registers;
 const RegisterItem = db.registerItem;
+const TestRegister = db.testregister;
 
 async function createUsers() {
   const user1 = new User({
@@ -80,17 +81,30 @@ async function createUsers() {
     "canEditModule": false,
     "canEditCourse": false
   });
+  const user5 = new User({
+    "username": "T",
+    "password": "password",
+    "email": "test",
+    "telephone": "0123356",
+    "canEditModule": false,
+    "canEditCourse": false
+  });
 
   user1.save(user1);
   user2.save(user2);
   user3.save(user3);
   user4.save(user4);
+  user5.save(user5);
   const student = new Student({
     studentID: "SU123",
     userRef: user4
   });
-
+  const student1 = new Student({
+    studentID: "SU124",
+    userRef: user5
+  });
   student.save(student);
+  student1.save(student1);
   const tutor1 = new Tutor({
     tutorId: "TU123",
     userRef: user1
@@ -125,14 +139,20 @@ async function createUsers() {
     students: student,
     attended: true
   });
+  const regitem2 = new RegisterItem({
+    students: student1,
+    attended: true
+  });
   regitem1.save(regitem1);
+  regitem2.save(regitem2);
 
   const register = new Register({
-    dateTime: 2022-11-16,
-    attendanceList: [regitem1]
+    dateTime: Date.now(),
+    attendanceList: [regitem1, regitem2]
   });
 
   register.save(register);
+
   const class1 = new Class({
     classID: "CL123",
     className: "Security",

@@ -3,7 +3,9 @@ module.exports = app => {
     const router = require("express").Router();
 
 
-    router.get("/Register/Absent", registerController.MarkAbsent);
+    router.post("/Register/Absent", registerController.MarkAbsent);
+    router.post("/Register/Present", registerController.MarkAttended);
+    router.post("/Register/Edit", registerController.EditAttendance);
 
     app.use("/", router);
 
