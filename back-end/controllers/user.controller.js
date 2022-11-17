@@ -58,11 +58,23 @@ exports.updateUserPassword = async(req, res) => {
   });
 };
 
-exports.updateUserTel = (req, res) => {
+exports.updateUserTel = async(req, res) => {
+  if(!req.body){return res.status(400).send({message: "No Request Data Sent"})};
+  if(!User.findOne({username: req.body.username})) {return res.status(400).send({message: "User is not found"})};
 
+
+  const userdata = await User.findOne({username: req.body.username});
+
+  User.findByIdAndUpdate(userdata._id, {telephone: req.body.telephone}).then(data => {
+    res.send(data);
+  });
 };
 
-exports.deleteOneUser = (req, res) => {
+exports.deleteOneUser = async(req, res) => {
+  if(!req.body){return res.status(400).send({message: "No Request Data Sent"})};
+  if(!User.findOne({username: req.body.username})) {return res.status(400).send({message: "User is not found"})};
 
+  const userdata = await User.findOne({username: req.body.username});
+  User.findByIdAndDelete(userdata._id).then(res.send({message: "User deleted"}));
 };
 

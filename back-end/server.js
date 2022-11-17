@@ -29,8 +29,7 @@ var corsOptions = {
 // Sets the app to use the Routes for the api
 require("./routes/user.routes")(app);
 require("./routes/tutor.routes")(app);
-require("./routes/moduleleader.routes")(app);
-require("./routes/courseleader.routes")(app);
+require("./routes/student.routes")(app);
 require("./routes/class.routes")(app);
 require("./routes/register.routes")(app);
 

@@ -2,14 +2,14 @@ const db = require("../models");
 const User = db.users;
 const Tutor = db.tutors;
 
-exports.create = (req, res) => {
+exports.createTutor = (req, res) => {
     const user = new User({
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
         telephone: req.body.telephone,
-        canEditModule: false,
-        canEditCourse: false
+        canEditModule: req.body.module,
+        canEditCourse: req.body.course
     });
 
     user.save(user);
@@ -29,15 +29,32 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
+exports.findAllTutor = (req, res) => {
     Tutor.find().then(data => {
         res.send(data);
     });
 };
 
-exports.findOne = (req, res) => {
+exports.findOneTutor = (req, res) => {
     const findTutor = req.body.tutor;
     Tutor.find({ tutorId: findTutor }).then(data => {
-        res.send(data)
+        res.send(data);
     });
+};
+
+exports.findTutorUser = async(req, res) => {
+    const findTutor = req.body.tutor;
+    const tutordata = await Tutor.findOne({tutorId: findTutor});
+
+    User.findById(tutordata.userRef).then(data => {
+        res.send(data);
+    });
+};
+
+exports.deleteTutor = async(req,res) => {
+    const findTutor = req.body.tutor;
+    const tutordata = await Tutor.findOne({tutorId: findTutor});
+
+    User.findByIdAndDelete(tutordata.userRef);
+    Tutor.findByIdAndDelete(tutordata._id).then(res.send({message: "User & Tutor: " + tutorId + " Deleted"}));
 };

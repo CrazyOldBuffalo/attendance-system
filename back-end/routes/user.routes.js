@@ -22,6 +22,7 @@ module.exports = app => {
     router.get("/User/All", userController.findAllUsers);
     router.post("/User/UpdateTel", userController.updateUserTel);
     router.post("/User/UpdatePass", userController.updateUserPassword);
+    router.get("/User/Delete", userController.deleteOneUser);
 
     // Sets the starting endpoint for the router to be /
     // for example localhost://5000/ will return "test"
