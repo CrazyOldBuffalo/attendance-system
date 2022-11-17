@@ -19,9 +19,8 @@ db.port = dbconfig.port;
 // User models
 db.users = require("./user.model")(mongoose);
 db.tutors = require("./tutor.model")(mongoose);
-db.moduleLeaders = require("./moduleleader.model")(mongoose);
-db.courseLeaders = require("./courseleader.model")(mongoose);
 db.students = require("./student.model")(mongoose);
+db.academicAdvisors = require('./academicadvisor.model')(mongoose);
 
 // Course and attendance models
 db.courses = require("./course.model")(mongoose);

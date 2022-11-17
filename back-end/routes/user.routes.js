@@ -17,9 +17,10 @@ module.exports = app => {
 
     // Sets endpoint /User to be a POST command to add something to the db (see controller for definition)
     // Another get command on endpoint /User/All to return all items in the db
-    router.post("/User/Create", userController.create);
-    router.get("/User/Find", userController.findOne);
-    router.get("/User/All", userController.findAll);
+    router.post("/User/Create", userController.createUser);
+    router.get("/User/Find", userController.findOneUser);
+    router.get("/User/All", userController.findAllUsers);
+    router.post("/User/UpdateTel", userController.);
 
     // Sets the starting endpoint for the router to be /
     // for example localhost://5000/ will return "test"

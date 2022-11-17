@@ -13,6 +13,10 @@ module.exports = mongoose => {
                     ref: "User",
                     required: true
                 },
+                modules: [{
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Module"
+                }]
             }
         )
     );

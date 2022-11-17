@@ -16,6 +16,11 @@ module.exports = mongoose => {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Student",
                 }],
+                type: {
+                    type: String,
+                    enum: ['Lecture', 'Tutorial'],
+                    default: 'Tutorial'
+                },
                 tutorRef: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Tutor",
@@ -23,7 +28,6 @@ module.exports = mongoose => {
                 register: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Register",
-                    required: true
                 }
             }
         )

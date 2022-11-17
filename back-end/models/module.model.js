@@ -18,7 +18,7 @@ module.exports = mongoose => {
                 }],
                 moduleLeader: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "ModuleLeader",
+                    ref: "Tutor",
                     required: true
                 },
                 classes: [{
@@ -29,7 +29,8 @@ module.exports = mongoose => {
                 tutors: [{
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Tutor",
-                    required: true
+                    required: true,
+                    unique: true
                 }]
             }
         )

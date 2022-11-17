@@ -18,7 +18,7 @@ module.exports = mongoose => {
                 }],
                 courseLeader: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "CourseLeader",
+                    ref: "Tutor",
                     required: true
                 },
                 modules: [{

@@ -3,10 +3,11 @@
 // create function is used for posting to the db (needs removing)
 
 
+const { Exception } = require("sass");
 const db = require("../models");
 const User = db.users;
 
-exports.create = (req, res) => {
+exports.createUser = (req, res) => {
   const user = new User({
     username: req.body.username,
     password: req.body.password,
@@ -23,7 +24,7 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Tutorials from the database.
-exports.findOne = (req, res) => {
+exports.findOneUser = (req, res) => {
   const findUser = req.body.username;
   User.find({username: findUser}).then(data => {
     res.send(data);
@@ -37,10 +38,23 @@ exports.findOne = (req, res) => {
 };
 
 // Find a single Tutorial with an id
-exports.findAll = (req, res) => {
+exports.findAllUsers = (res) => {
   User.find().then(data => {
     res.send(data);
   });
+};
+
+exports.updateUserPassword = async (req, res) => {
+  var filter = req.body.user;
+  var userid = this.findOneUser(filter);
+  console.log(userid._id);
+};
+
+exports.updateUserTel = (req, res) => {
+
+};
+
+exports.deleteOneUser = (req, res) => {
 
 };
 
