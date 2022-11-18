@@ -52,18 +52,6 @@ exports.updateStudentUser = async (req, res) => {
     UserController.ExtendsUserUpdate(studentdata, req, res);
 };
 
-exports.updateStudentAdvisor = async (req, res) => {
-    if (!req.body) { return err => errors.error400(err, res) };
-    const studentdata = await Student.findOne({ studentID: req.params.id });
-    if (!studentdata) { return err => errors.error404(err, res) };
-
-    const advisordata = await academicAdvisorController.extendsacademicAdvisorFind(req, res);
-
-    Student.findByIdAndUpdate(studentdata._id, { academicAdvisor: advisordata._id }).then(
-        res.send({ message: "Student: " + studentdata.studentID + " has advisor: " + req.body.advisor + " added" }))
-        .catch(err => errors.error500(err, res));
-};
-
 exports.extendsStudentFind = (req, res) => {
     if(!req.body) {return err=> errors.error400(err, res)};
     const studentdata = Student.findOne({studentID: req.body.studentid});
@@ -71,4 +59,9 @@ exports.extendsStudentFind = (req, res) => {
     else {
         return studentdata;
     };
+};
+
+exports.updateStudentAdvisor = (req, adv, res) => {
+    if(!req || !adv) {return err=> errors.error400(err, res)};
+    Student.findByIdAndUpdate(req._id, {academicAdvisor: adv._id}).catch(err => errors.error500(err, res));
 };

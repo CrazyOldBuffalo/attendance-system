@@ -20,7 +20,7 @@ module.exports = app => {
     router.post("/User/Create", userController.createUser);
     router.get("/User/All", userController.findAllUsers); 
     router.get("/User/Find/:id", userController.findOneUser);
-    router.put("/User/Update/:id", userController.updateStudenUser);
+    router.put("/User/Update/:id", userController.updateUser);
     router.delete("/User/Delete/:id", userController.deleteOneUser);
 
     // Sets the starting endpoint for the router to be /
