@@ -27,7 +27,7 @@ exports.createUser = (req, res) => {
 exports.findOneUser = (req, res) => {
   const findUser = req.params.id;
   User.find({ studentID: findUser }).then(data => {
-    if(!data) {err => errors.error404(err, res)}
+    if (!data) { err => errors.error404(err, res) }
     else {
       res.send(data);
     }
@@ -70,21 +70,21 @@ exports.deleteOneUser = (req, res, next) => {
 
 exports.ExtendsUserDelete = (val, res) => {
   var err;
-  if(!val) {return error404(err, res)};
+  if (!val) { return error404(err, res) };
   User.findByIdAndDelete(val.userRef).then(console.log("User Deleted"));
   return;
 }
 
 exports.ExtendsUserUpdate = (val, req, res) => {
   var err;
-  if(!val) {return error404(err, res)};
-  User.findByIdAndUpdate(val.userRef, req.body).then(console.log("User Updated")).then(res.send({message: "User: " + val.userRef + " Updated"}))
-  .catch(err => errors.error400(err, res));
+  if (!val) { return error404(err, res) };
+  User.findByIdAndUpdate(val.userRef, req.body).then(console.log("User Updated")).then(res.send({ message: "User: " + val.userRef + " Updated" }))
+    .catch(err => errors.error400(err, res));
 }
 
-exports.ExtendsUserCreate = (val, req, res) => {
+exports.ExtendsUserCreate = (val, res) => {
   var err;
-  if(!val) {return error404(err, res)};
+  if (!val) { return error404(err, res) };
   const user = new User({
     username: val.body.username,
     password: val.body.password,

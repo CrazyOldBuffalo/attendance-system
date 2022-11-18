@@ -2,13 +2,15 @@
 const db = require('../models');
 const errors = require("./utils/errors.controller");
 const UserController = require("./user.controller");
+const academicAdvisorController = require("./academicadvisor.controller");
 const Student = db.students;
 
 
 exports.createStudent = async (req, res) => {
     if (!req.body) { res.send(err => errors.error400(err, res)) };
 
-    const user = await UserController.ExtendsUserCreate(req);
+    const user = await UserController.ExtendsUserCreate(req, res);
+    if(!user) { return err => errors.error500(err, res)};
     const student = new Student({
         studentID: req.body.studentID,
         userRef: user,
@@ -44,18 +46,29 @@ exports.deleteStudent = async (req, res) => {
 
 exports.updateStudentUser = async (req, res) => {
     if (!req.body) { return err => errors.error400(err, res) };
-    const studentdata = await Student.findOne({studentID: req.params.id});
-    if(!studentdata) {return err => errors.error404(err, res)};
+    const studentdata = await Student.findOne({ studentID: req.params.id });
+    if (!studentdata) { return err => errors.error404(err, res) };
 
     UserController.ExtendsUserUpdate(studentdata, req, res);
 };
 
-exports.updateStudentAdvisor = async (req,res) => {
-    if(!req.body) {return err => errors.error400(err, res)};
-    const studentdata = await Student.findOne({studentID: req.params.id});
-    if(!studentdata) {return err => errors.error404(err, res)};
+exports.updateStudentAdvisor = async (req, res) => {
+    if (!req.body) { return err => errors.error400(err, res) };
+    const studentdata = await Student.findOne({ studentID: req.params.id });
+    if (!studentdata) { return err => errors.error404(err, res) };
 
-    Student.findByIdAndUpdate(studentdata._id, {academicAdvisor: req.body.advisor}).then(
-        res.send({message: "Student: " + studentdata.studentID + " has advisor: " + req.body.advisor + " added"}))
+    const advisordata = await academicAdvisorController.extendsacademicAdvisorFind(req, res);
+
+    Student.findByIdAndUpdate(studentdata._id, { academicAdvisor: advisordata._id }).then(
+        res.send({ message: "Student: " + studentdata.studentID + " has advisor: " + req.body.advisor + " added" }))
         .catch(err => errors.error500(err, res));
+};
+
+exports.extendsStudentFind = (req, res) => {
+    if(!req.body) {return err=> errors.error400(err, res)};
+    const studentdata = Student.findOne({studentID: req.body.studentid});
+    if(!studentdata) {return err=> errors.error404(err, res)}
+    else {
+        return studentdata;
+    };
 };

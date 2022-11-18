@@ -6,6 +6,7 @@ module.exports = mongoose => {
                 academicAdvisorID: {
                     type: String,
                     required: true,
+                    unique: true
                 },
                 userRef: {
                     type: mongoose.Schema.Types.ObjectId,
@@ -13,7 +14,8 @@ module.exports = mongoose => {
                 },
                 students: [{
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "Student"
+                    ref: "Student",
+                    unique: true
                 }]
             }
         )
