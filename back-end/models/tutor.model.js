@@ -3,7 +3,7 @@ module.exports = mongoose => {
         "tutor",
         mongoose.Schema(
             {
-                tutorId: {
+                tutorID: {
                     type: String,
                     required: true,
                     unique: true

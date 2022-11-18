@@ -105,15 +105,15 @@ async function createUsers() {
   student.save(student);
   student1.save(student1);
   const tutor1 = new Tutor({
-    tutorId: "TU123",
+    tutorID: "TU123",
     userRef: user1
   });
   const tutor2 = new Tutor({
-    tutorId: "TU111",
+    tutorID: "TU111",
     userRef: user2
   });
   const tutor3 = new Tutor({
-    tutorId: "TU132",
+    tutorID: "TU132",
     userRef: user3
   });
   tutor1.save(tutor1);

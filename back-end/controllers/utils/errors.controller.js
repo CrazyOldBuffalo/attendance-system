@@ -12,3 +12,9 @@ exports.error400 = (err, res) => {
     });
 };
 
+exports.error500 = (err, res) => {
+    res.status(500).send({
+        message:
+            err.message || "Server failed to handle request"
+    });
+};
