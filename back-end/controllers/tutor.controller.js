@@ -1,19 +1,13 @@
 const db = require("../models");
+const UserController = require("../controllers/user.controller");
+const errors = require("./utils/errors.controller");
 const User = db.users;
 const Tutor = db.tutors;
 
-exports.createTutor = (req, res) => {
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        telephone: req.body.telephone,
-        canEditModule: req.body.module,
-        canEditCourse: req.body.course
-    });
+exports.createTutor = async (req, res) => {
+    if (!req.body) { return errors.error400(res); };
 
-    user.save(user);
-
+    const user = await UserController.ExtendsUserCreate(req);
     const tutor = new Tutor({
         tutorId: req.body.tutorid,
         userRef: user
@@ -21,40 +15,33 @@ exports.createTutor = (req, res) => {
 
     tutor.save(tutor).then(data => {
         res.send(data);
-    }).catch(err => {
-        res.status(500).send({
-            message:
-                err.message || "unable to send to Tutor DB"
-        });
-    });
+    }).catch(err => errors.error404(err, res));
 };
 
 exports.findAllTutor = (req, res) => {
-    Tutor.find().then(data => {
+    Tutor.find().populate({ path: "userRef", model: "user" }).then(data => {
         res.send(data);
-    });
+    }).catch(err => errors.error404(err, req));
 };
 
 exports.findOneTutor = (req, res) => {
-    const findTutor = req.body.tutor;
-    Tutor.find({ tutorId: findTutor }).then(data => {
+    const findTutor = req.params.id
+    Tutor.findOne({ tutorId: findTutor }).populate({ path: "userRef", model: "user" }).then(data => {
         res.send(data);
-    });
+    }).catch(err => errors.error404(err, res));
 };
 
-exports.findTutorUser = async(req, res) => {
-    const findTutor = req.body.tutor;
-    const tutordata = await Tutor.findOne({tutorId: findTutor});
+exports.deleteTutor = async (req, res, next) => {
+    const tutordata = await Tutor.findOne({ tutorId: req.params.id});
 
-    User.findById(tutordata.userRef).then(data => {
-        res.send(data);
-    });
+    UserController.ExtendsUserDelete(tutordata);
+    Tutor.findByIdAndDelete(tutordata._id).then(res.send({ message: "User & Tutor: " + findTutor + " Deleted" }));
 };
 
-exports.deleteTutor = async(req,res) => {
-    const findTutor = req.body.tutor;
-    const tutordata = await Tutor.findOne({tutorId: findTutor});
-
-    User.findByIdAndDelete(tutordata.userRef);
-    Tutor.findByIdAndDelete(tutordata._id).then(res.send({message: "User & Tutor: " + tutorId + " Deleted"}));
+exports.updateTutorUser = async (req, res) => {
+    var err;
+    if (!req.body) { res.send({ message: "missing request data" }) };
+    const tutordata = await Tutor.findOne({ tutorId: req.params.id});
+    if(!tutordata) { errors.error404(err, res)};
+    UserController.ExtendsUserUpdate(tutordata, req, res);
 };

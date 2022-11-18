@@ -4,9 +4,9 @@ module.exports = app => {
 
     router.post("/Tutor/Create", tutorController.createTutor);
     router.get("/Tutor/Find", tutorController.findAllTutor);
-    router.get("/Tutor/One", tutorController.findOneTutor);
-    router.get("/Tutor/UserFind", tutorController.findTutorUser);
-    router.post("/Tutor/Delete", tutorController.deleteTutor);
+    router.get("/Tutor/One/:id", tutorController.findOneTutor);
+    router.delete("/Tutor/Delete/:id", tutorController.deleteTutor);
+    router.put("/Tutor/Update/:id", tutorController.updateTutorUser);
     app.use("/", router);
 }
 
