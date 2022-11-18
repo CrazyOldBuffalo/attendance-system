@@ -7,6 +7,7 @@ module.exports = app => {
     router.get("/Tutor/One/:id", tutorController.findOneTutor);
     router.delete("/Tutor/Delete/:id", tutorController.deleteTutor);
     router.put("/Tutor/Update/:id", tutorController.updateTutorUser);
+    router.put("/Tutor/Update/Modules/:id", tutorController.updateModuleList);
     app.use("/", router);
 }
 

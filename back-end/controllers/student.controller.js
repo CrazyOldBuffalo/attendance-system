@@ -1,7 +1,7 @@
 // Contains the search for student ID function
 // 
 const db = require('../models');
-const User = db.users;
+const UserController = require("./user.controller");
 const Student = db.students;
 
 

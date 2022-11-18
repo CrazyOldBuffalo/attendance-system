@@ -35,7 +35,8 @@ exports.deleteTutor = async (req, res, next) => {
     const tutordata = await Tutor.findOne({ tutorId: req.params.id});
 
     UserController.ExtendsUserDelete(tutordata);
-    Tutor.findByIdAndDelete(tutordata._id).then(res.send({ message: "User & Tutor: " + findTutor + " Deleted" }));
+    Tutor.findByIdAndDelete(tutordata._id).then(res.send({ message: "User & Tutor: " + findTutor + " Deleted" }))
+    .catch(err => errors.error400(err, res));
 };
 
 exports.updateTutorUser = async (req, res) => {
@@ -43,5 +44,15 @@ exports.updateTutorUser = async (req, res) => {
     if (!req.body) { res.send({ message: "missing request data" }) };
     const tutordata = await Tutor.findOne({ tutorId: req.params.id});
     if(!tutordata) { errors.error404(err, res)};
+
     UserController.ExtendsUserUpdate(tutordata, req, res);
 };
+
+exports.updateModuleList = async (req, res) => {
+    var err;
+    if(!req.body) {res.send({message: "missing request data"})};
+    const tutordata = await Tutor.findOne({tutorId: req.params.id});
+    if(!tutordata) {errors.error404(err, res)};
+
+    Tutor.findByIdAndUpdate(tutordata._id, {"$push": {"modules": req.body.modules}}).then(res.send({message: "Tutor: " + tutordata.tutorId + " has updated module list"}));
+}
