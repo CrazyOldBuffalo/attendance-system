@@ -31,13 +31,17 @@ exports.createCourse = async (req, res) => {
 
 exports.findAllCourses = (req, res) => {
     Course.find().populate({ path: "courseLeader", model: "tutor" })
-        .populate({ path: "modules", model: "module" }).populate({ path: "students", model: "student" })
+        .populate({ path: "modules", model: "module" })
+        .populate({ path: "students", model: "student" })
         .then(data => res.send(data))
         .catch(err => errors.error500(err, res));
 };
 
 exports.findOneCourse = (req, res) => {
-    Course.findOne({ courseID: req.params.id }).then(data => {
+    Course.findOne({ courseID: req.params.id }).populate({ path: "courseLeader", model: "tutor" })
+    .populate({ path: "modules", model: "module" })
+    .populate({ path: "students", model: "student" })
+    .then(data => {
         if (!data) { return err => errors.error404(err, res) }
         else { res.send(data) };
     }).catch(err => errors.error500(err, res));
@@ -70,17 +74,6 @@ exports.removeStudent = async (req, res) => {
     Course.findOneAndUpdate({courseID: req.params.id}, {$pull: {students: studentdata._id}}).then(data => {
         if(!data) {return err => errors.error404(err,res);}
         else {res.send({message: "Course: " + req.params.id + " has removed student: " + studentdata.studentID})}
-    }).catch(err => errors.error500(err,res));
-};
-
-exports.removeModule = (req, res) => {
-    if(!req.body) {return err => errors.error400(err, res)};
-    // replace with module => const studentdata = await StudentController.extendsStudentFind(req, res);
-    if(!moduledata) {return err => errors.error404(err, res)};
-
-    Course.findOneAndUpdate({courseID: req.params.id}, {$pull: {modules: moduledata._id}}).then(data => {
-        if(!data) {return err => errors.error404(err,res);}
-        else {res.send({message: "Course: " + req.params.id + " has removed module: " + moduledata.moduleID})}
     }).catch(err => errors.error500(err,res));
 };
 
