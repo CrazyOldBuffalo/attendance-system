@@ -4,7 +4,6 @@
 
 const errors = require("./utils/errors.controller");
 const db = require("../models");
-const { error404 } = require("./utils/errors.controller");
 const User = db.users;
 
 exports.createUser = (req, res) => {
@@ -20,7 +19,7 @@ exports.createUser = (req, res) => {
   user.save(user)
     .then(data => {
       res.send(data);
-    })
+    }).catch(err => errors.error500(err, res));
 };
 
 // Retrieve all Tutorials from the database.
@@ -31,13 +30,7 @@ exports.findOneUser = (req, res) => {
     else {
       res.send(data);
     }
-  })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred"
-      });
-    });
+  }).catch(err => errors.error500(err, res));
 };
 
 // Find a single Tutorial with an id
@@ -48,22 +41,17 @@ exports.findAllUsers = (res) => {
 };
 
 exports.updateUser = (req, res, next) => {
-  if (!req.body) { return res.status(400).send({ message: "No Update Data sent" }) };
+  if (!req.body) { return err => errors.error400(err, res) };
   const username = req.params.id;
   if (!User.findOne({ username: username })) { return res.status(404).send({ message: "User is not found" }) };
 
-  User.findOneAndUpdate({ username: username }, req.body).then(data => { res.send(data) }).catch(err => {
-    res.status(400).send({
-      message:
-        err.message || "Error updating user ${username}"
-    });
-  });
-
+  User.findOneAndUpdate({ username: username }, req.body)
+  .then(data => { res.send(data) })
+  .catch(err => errors.error500(err, res));
 };
 
 exports.deleteOneUser = (req, res, next) => {
-  const username = req.params.id
-  if (!User.findOne({ username: username })) { return res.status(404).send({ message: "User is not found" }) };
+  if (!User.findOne({ username: req.params.id })) { return err => errors.error500(err, res); };
 
   User.findOneAndDelete({ username: username }).then(res.send({ message: "User Deleted" }));
 };
@@ -76,15 +64,20 @@ exports.ExtendsUserDelete = (val, res) => {
 }
 
 exports.ExtendsUserUpdate = (val, req, res) => {
-  var err;
-  if (!val) { return error404(err, res) };
+  if (!val) { return err => errors.error400(err, res) };
   User.findByIdAndUpdate(val.userRef, req.body).then(console.log("User Updated")).then(res.send({ message: "User: " + val.userRef + " Updated" }))
     .catch(err => errors.error400(err, res));
 }
 
+exports.ExtendsUserToggles = (val, req, res) => {
+  if(!val) {return err => errors.error400(err, res)};
+  User.findByIdAndUpdate(val.userRef, {"$set": {"canEditCourse": req.canEditCourse, "canEditModule": req.canEditModule}}).then(console.log("User updated"));
+  return;
+}
+
 exports.ExtendsUserCreate = (val, res) => {
-  var err;
-  if (!val) { return error404(err, res) };
+
+  if (!val) { return err => error400(err, res) };
   const user = new User({
     username: val.body.username,
     password: val.body.password,

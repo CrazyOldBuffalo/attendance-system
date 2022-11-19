@@ -31,6 +31,7 @@ require("./routes/user.routes")(app);
 require("./routes/tutor.routes")(app);
 require("./routes/student.routes")(app);
 require("./routes/academicadvisor.routes")(app);
+require("./routes/course.routes")(app);
 require("./routes/class.routes")(app);
 require("./routes/register.routes")(app);
 

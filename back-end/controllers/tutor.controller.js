@@ -22,7 +22,7 @@ exports.createTutor = async (req, res) => {
 exports.findAllTutors = (req, res) => {
     Tutor.find().populate({ path: "userRef", model: "user" }).then(data => {
         res.send(data);
-    }).catch(err => errors.error500(err, req));
+    }).catch(err => errors.error500(err, res));
 };
 
 exports.findOneTutor = (req, res) => {
@@ -59,3 +59,10 @@ exports.updateModuleList = async (req, res) => {
 
     Tutor.findByIdAndUpdate(tutordata._id, { "$push": { "modules": req.body.modules } }).then(res.send({ message: "Tutor: " + tutordata.tutorId + " has updated module list" }));
 }
+
+exports.extendsTutorFind = (req, res) => {
+    if (!req.body) {return err => errors.error400(err, res)}
+    else {
+        return tutordata = Tutor.findOne({tutorID: req.body.tutorID});
+    };
+};
