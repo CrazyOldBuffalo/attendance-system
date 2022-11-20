@@ -29,8 +29,10 @@ var corsOptions = {
 // Sets the app to use the Routes for the api
 require("./routes/user.routes")(app);
 require("./routes/tutor.routes")(app);
-require("./routes/moduleleader.routes")(app);
-require("./routes/courseleader.routes")(app);
+require("./routes/student.routes")(app);
+require("./routes/academicadvisor.routes")(app);
+require("./routes/course.routes")(app);
+require("./routes/module.routes")(app);
 require("./routes/class.routes")(app);
 require("./routes/register.routes")(app);
 
@@ -45,6 +47,8 @@ const Module = db.modules;
 const Course = db.courses;
 const Class = db.classes;
 const Register = db.registers;
+const RegisterItem = db.registerItem;
+const TestRegister = db.testregister;
 
 async function createUsers() {
   const user1 = new User({
@@ -79,64 +83,70 @@ async function createUsers() {
     "canEditModule": false,
     "canEditCourse": false
   });
+  const user5 = new User({
+    "username": "T",
+    "password": "password",
+    "email": "test",
+    "telephone": "0123356",
+    "canEditModule": false,
+    "canEditCourse": false
+  });
 
   user1.save(user1);
   user2.save(user2);
   user3.save(user3);
   user4.save(user4);
+  user5.save(user5);
   const student = new Student({
     studentID: "SU123",
     userRef: user4
   });
-
+  const student1 = new Student({
+    studentID: "SU124",
+    userRef: user5
+  });
   student.save(student);
+  student1.save(student1);
   const tutor1 = new Tutor({
-    tutorId: "TU123",
+    tutorID: "TU123",
     userRef: user1
   });
   const tutor2 = new Tutor({
-    tutorId: "TU111",
+    tutorID: "TU111",
     userRef: user2
   });
   const tutor3 = new Tutor({
-    tutorId: "TU132",
+    tutorID: "TU132",
     userRef: user3
   });
   tutor1.save(tutor1);
   tutor2.save(tutor2);
   tutor3.save(tutor3);
 
-  const moduleleader1 = new ModuleLeader({
-    tutorRef: tutor2
+  const regitem1 = new RegisterItem({
+    students: student,
+    attended: true
   });
-  const moduleleader2 = new ModuleLeader({
-    tutorRef: tutor3
+  const regitem2 = new RegisterItem({
+    students: student1,
+    attended: true
   });
-  moduleleader1.save(moduleleader1);
-  moduleleader2.save(moduleleader2);
+  regitem1.save(regitem1);
+  regitem2.save(regitem2);
 
-  const courseleader = new CourseLeader({
-    moduleLeaderRef: moduleleader1
-  });
-
-  courseleader.save(courseleader);
-
-  const register1 = new Register({
-    dateTime: 2022-11-14,
-    attendanceList: [{
-      students: student,
-      attendanceStatus: true
-    }]
+  const register = new Register({
+    dateTime: Date.now(),
+    attendanceList: [regitem1, regitem2]
   });
 
-  register1.save(register1);
+  register.save(register);
 
   const class1 = new Class({
     classID: "CL123",
     className: "Security",
     students: [student],
     tutorRef: tutor1,
-    register: register1
+    register: register
   });
 
   class1.save(class1);
@@ -145,7 +155,7 @@ async function createUsers() {
     moduleName: "SAD :(",
     moduleID: "MD123",
     students: student,
-    moduleLeader: moduleleader1,
+    moduleLeader: tutor1,
     classes: [class1],
     tutors: [tutor1, tutor2]
   });
@@ -156,7 +166,7 @@ async function createUsers() {
     courseName: "Software Engineering bENG",
     courseID: "SE123",
     students: [student],
-    courseLeader: courseleader,
+    courseLeader: tutor3,
     modules: [module]
   });
 
