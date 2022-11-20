@@ -52,9 +52,9 @@ exports.updateStudentUser = async (req, res) => {
     UserController.ExtendsUserUpdate(studentdata, req, res);
 };
 
-exports.extendsStudentFind = (req, res) => {
+exports.extendsStudentFind = async(req, res) => {
     if(!req.body) {return err=> errors.error400(err, res)};
-    const studentdata = Student.findOne({studentID: req.body.studentid});
+    const studentdata = await Student.findOne({studentID: req.body.studentID});
     if(!studentdata) {return err=> errors.error404(err, res)}
     else {
         return studentdata;

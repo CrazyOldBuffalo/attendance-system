@@ -84,6 +84,16 @@ exports.deleteCourse = (req, res) => {
     .catch(err => errors.error500(err,res));
 };
 
+exports.findStudent = async (req,res) => {
+    const studentdata = await StudentController.extendsStudentFind(req);
+    const coursestudentdata = await Course.findOne({courseID: req.body.courseID, "students": {"$in": studentdata._id}});
+    if(!coursestudentdata) {return err => errors.error404(err, res)}
+    else {
+        return coursestudentdata
+    };
+};
+
+
 exports.getCourseAttendance = (req, res) => {
     /// ???? depends if needed
 };

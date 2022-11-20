@@ -4,6 +4,8 @@ const Module = db.modules;
 const TutorController = require("./tutor.controller");
 const CourseController = require('./course.controller');
 const userController = require("./user.controller");
+const studentController = require("./student.controller");
+const classController = require("./class.controller");
 
 exports.createModule = async (req, res) => {
     if (!req.body) { return err => errors.error400(err, res) };
@@ -71,9 +73,15 @@ exports.addClass = (req, res) => {
 
 };
 
-exports.addStudent = (req, res) => {
+exports.addStudent = async(req, res) => {
     if(!req.body) {return err => errors.error400(err,res)};
-
+    const incourse = await CourseController.findStudent(req);
+    const studentdata = await studentController.extendsStudentFind(req, res);
+    if(!incourse) {return err => errors.error404(err, res)}
+    else {
+        Module.findOneAndUpdate({moduleID: req.params.id}, {$push: {students: studentdata._id}})
+        .then(console.log("updated module"));
+    }
 };
 
 exports.removeStudent = (req, res) => {
@@ -96,6 +104,16 @@ exports.deletemodule = (req,res) => {
         else {res.send({message: "module: " + req.params.id + " has been deleted"})};
     }).catch(err => errors.error500(err, res));
 };
+
+exports.returnStudentList = async (req,res) => {
+    const studentdata = studentController.extendsStudentFind(req, res);
+    if(!studentdata) {return err => errors.error404(err, res)};
+    const studentList = await Module.find({moduleID: req.params.id, "students": {"$in": studentdata._id}});
+    if(!studentList) {return err => errors.error404(err, res)}
+    else {
+        return studentList;
+    };
+}
 
 exports.getModuleAttendance = (req, res) => {
     ///??? depends if needed
