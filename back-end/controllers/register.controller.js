@@ -58,3 +58,18 @@ exports.deleteRegisterItem = async(req,res) => {
     };
 };
 
+exports.editRegisterItem = async (req, res) =>{
+    const classdata = await classController.extendsClassFind(req, res);
+    const register = await Register.findById(classdata.register._id);
+    const student = await studentController.extendsStudentFind(req, res);
+
+    if(!student) {return err => errors.error404(err, res)}
+    else {
+        const studentlist = await classController.searchStudents(req, res);
+        if(!studentlist) {return err => errors.error404(err, res)}
+        else {
+            const objectid = studentlist.register.attendanceList.find(element => student);
+            registerItemController.updateRegisterItem(objectid, req, res);
+        };
+    };
+}

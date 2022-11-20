@@ -72,11 +72,6 @@ exports.searchStudents = async (req, res) => {
     }
 };
 
-exports.test = async(req, res) => {
-    const testdata = await Class1.findOne({classID: req.params.id});
-    const registerdata = await registerController.findRegister(testdata, res);
-    console.log(registerdata);
-}
 
 exports.extendsClassFind = async(req, res) => {
     const classdata = await Class1.findOne({classID: req.body.classID});
