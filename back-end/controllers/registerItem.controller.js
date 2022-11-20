@@ -22,7 +22,7 @@ exports.findOne = async (req, res) => {
 };
 
 exports.deleteRegisterItem = (req, res) => {
-    RegisterItem.findByIdAndDelete(req._id).then(data => {
+    RegisterItem.findByIdAndDelete(req).then(data => {
         if(!data) {return err => errors.error404(err, res)}
         else {
             console.log("registerItem: " + req._id + " has been deleted");
@@ -32,7 +32,7 @@ exports.deleteRegisterItem = (req, res) => {
 };
 
 exports.updateRegisterItem = (req, val, res) => {
-    RegisterItem.findByIdAndUpdate(req._id, {attended: val.body.attended}).then(data => {
+    RegisterItem.findByIdAndUpdate(req, {attended: val.body.attended}).then(data => {
         if(!data) {return err => errors.error404(err, res)}
         else {
             console.log("registerItem: " + req._id + "has been updated");

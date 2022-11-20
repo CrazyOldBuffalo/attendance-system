@@ -49,9 +49,11 @@ exports.deleteRegisterItem = async(req,res) => {
         const studentlist = await classController.searchStudents(req, res);
         if(!studentlist) {return err => errors.error404(err, res)}
         else {
-            const registerItem = await registerItemController.findOne();
-            registerItemController.deleteRegisterItem(registerItem._Id);
-
+            const objectid = studentlist.register.attendanceList.find(element => student);
+            registerItemController.deleteRegisterItem(objectid, res);
+            Register.findByIdAndUpdate(register._id, {$pull: {attendanceList: objectid._id}})
+            .then(res.send({message: "registerItem: " + objectid._id + "Deleted"}))
+            .catch(err => errors.error500(err,res));
         };
     };
 };
