@@ -47,35 +47,6 @@ exports.findOneCourse = (req, res) => {
     }).catch(err => errors.error500(err, res));
 };
 
-exports.addModule = async(req, res) => {
-    if(!req.body) {return err => errors.error400(err, res)};
-
-    //add check here when module is done
-    Course.findOneAndUpdate({courseID: req.params.id}, {$push: {module: moduledata._id}}).then(
-        req.send({message: "Course: " + req.params.id + " has been updated to include module: " + moduledata.moduleID}))
-        .catch(err => errors.error500(err, res));
-};
-
-exports.addStudent = async (req, res) => {
-    if(!req.body) {return err => errors.error400(err, res)};
-
-    const studentdata = await StudentController.extendsStudentFind(req, res);
-    if(!studentdata) {return err => errors.error404(err, res)};
-    Course.findOneAndUpdate({courseID: req.params.id}, {$push: {students: studentdata._id}})
-    .then(req.send({message: "Course: " + req.params.id + " has been updated to add student: " + studentdata.studentID}))
-    .catch(err => errors.error500(err, res));
-};
-
-exports.removeStudent = async (req, res) => {
-    if(!req.body) {return err => errors.error400(err, res)};
-    const studentdata = await StudentController.extendsStudentFind(req, res);
-    if(!studentdata) {return err => errors.error404(err, res)};
-
-    Course.findOneAndUpdate({courseID: req.params.id}, {$pull: {students: studentdata._id}}).then(data => {
-        if(!data) {return err => errors.error404(err,res);}
-        else {res.send({message: "Course: " + req.params.id + " has removed student: " + studentdata.studentID})}
-    }).catch(err => errors.error500(err,res));
-};
 
 exports.deleteCourse = (req, res) => {
     if(!Course.findOne({courseID: req.params.id})) {return err => errors.error404(err,res)};

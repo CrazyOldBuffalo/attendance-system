@@ -1,8 +1,10 @@
 const db = require("../models");
 const errors = require("./utils/errors.controller");
-const Class1 = db.classes;
 const moduleController = require("./module.controller");
 const registerController = require("./register.controller");
+const studentController = require("./student.controller");
+
+const Class1 = db.classes;
 
 exports.createClass = async (req,res) => {
     if(!req.body) {return err => errors.error400(err, res)};
@@ -50,6 +52,35 @@ exports.addStudent = async (req, res) => {
     });
 };
 
-exports.getAttendanceData = async (req, res) => {
+exports.deleteClass = (req, res) => {
+    Class1.findOneAndDelete({classID: req.params.id}).then(data => {
+        if(!data) {return err => errors.error404(err, res)}
+        else {res.send({message: "class: " + res.params.id + " has been deleted"})};
+    }).catch(err => errors.error500(err, res));
+};
 
+exports.searchStudents = async (req, res) => {
+    if(!req.body) {return err => errors.error400(err, res)};
+    const studentdata = await studentController.extendsStudentFind(req, res);
+    if(!studentdata) {return err => errors.error404(err, res)}
+    else {
+        const studentlist = await Class1.findOne({classID: req.params.id, "students" :{"$in": studentdata._id}});
+        return studentlist;
+    }
+};
+
+exports.test = async(req, res) => {
+    const testdata = await Class1.findOne({classID: req.params.id});
+    const registerdata = await registerController.findRegister(testdata, res);
+    console.log(registerdata);
+}
+
+exports.extendsClassFind = async(req, res) => {
+    const classdata = await Class1.findOne({classID: req.body.classID});
+    if(!classdata) {return err => errors.error404(err, res)}
+    else {return classdata};
+};
+
+exports.getAttendanceData = async (req, res) => {
+ /// ????
 };

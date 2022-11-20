@@ -6,6 +6,6 @@ module.exports = app => {
 
     router.post("/Class/Create", classController.createClass);
     router.put("/Class/Students/:id", classController.addStudent);
-
+    router.get("/Class/Test/:id", classController.test);
     app.use("/", router);
 }

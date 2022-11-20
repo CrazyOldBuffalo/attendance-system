@@ -6,7 +6,5 @@ module.exports = app => {
     router.post("/Module/Create", moduleController.createModule);
     router.get("/Module/All", moduleController.findAllModules);
     router.get("/Module/Find/:id", moduleController.findOneModule);
-    router.get("/Module/Delete/:id", moduleController.deletemodule);
-    router.put("/Module/Students/:id", moduleController.addStudent);
     app.use("/", router);
 }

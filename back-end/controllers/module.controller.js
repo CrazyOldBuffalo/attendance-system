@@ -2,10 +2,9 @@ const db = require("../models");
 const errors = require("./utils/errors.controller");
 const Module = db.modules;
 const TutorController = require("./tutor.controller");
-const CourseController = require('./course.controller');
 const userController = require("./user.controller");
 const studentController = require("./student.controller");
-const classController = require("./class.controller");
+
 
 exports.createModule = async (req, res) => {
     if (!req.body) { return err => errors.error400(err, res) };
@@ -66,43 +65,6 @@ exports.findOneModule = (req, res) => {
                 res.send(data);
             }
         }).catch(err => { errors.error500(err, res) });
-};
-
-exports.addClass = (req, res) => {
-    if(!req.body) {return err => errors.error400(err,res)};
-
-};
-
-exports.addStudent = async(req, res) => {
-    if(!req.body) {return err => errors.error400(err,res)};
-    const incourse = await CourseController.findStudent(req);
-    const studentdata = await studentController.extendsStudentFind(req, res);
-    if(!incourse) {return err => errors.error404(err, res)}
-    else {
-        Module.findOneAndUpdate({moduleID: req.params.id}, {$push: {students: studentdata._id}})
-        .then(console.log("updated module"));
-    }
-};
-
-exports.removeStudent = (req, res) => {
-    if(!req.body) {return err => errors.error400(err,res)};
-    Module.findOneAndUpdate({ moduleID: req.params.id}, {$pull: {}})
-};
-
-exports.addTutor = (req, res) => {
-    if(!req.body) {return err => errors.error400(err,res)};
-};
-
-exports.removeTutor = (req, res) => {
-    if(!req.body) {return err => errors.error400(err,res)};
-    Module.findOneAndUpdate({ moduleID: req.params.id}, {$pull: {}})
-};
-
-exports.deletemodule = (req,res) => {
-    Module.findOneAndDelete({moduleID: req.params.id}).then(data => {
-        if(!data) {return err => errors.error404(err, res)}
-        else {res.send({message: "module: " + req.params.id + " has been deleted"})};
-    }).catch(err => errors.error500(err, res));
 };
 
 exports.returnStudentList = async (req,res) => {
