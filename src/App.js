@@ -7,6 +7,7 @@ import ViewAttendance from './Components/ViewAttendance'
 import SeachForAStudent from './Components/SearchForAStudent'
 import LoginScreen from './Components/LoginScreen'
 import './resources/styles/App.scss';
+import List from "./Components/List";
 import { BrowserRouter as Router, Routes, Route,NavLink,Link, useNavigate} from 'react-router-dom';
 import PrivateRoute from './Components/Auth/PrivateRoute';
 import Navbar from './Components/Navbar'
@@ -46,6 +47,10 @@ function App() {
     
     case "/LoginScreen":
       component = <LoginScreen/>
+      break
+
+    case "/List":
+      component = <List/>
       break
 
   }

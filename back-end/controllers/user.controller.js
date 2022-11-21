@@ -34,7 +34,7 @@ exports.findOneUser = (req, res) => {
 };
 
 // Find a single Tutorial with an id
-exports.findAllUsers = (res) => {
+exports.findAllUsers = (req, res) => {
   User.find().then(data => {
     res.send(data);
   });
