@@ -11,6 +11,10 @@ module.exports = mongoose => {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User"
                 },
+                academicAdvisor: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "AcademicAdvisor"
+                }
             }
         )
     );

@@ -14,17 +14,17 @@ module.exports = mongoose => {
                 },
                 students: [{
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "Student"
+                    ref: "Student",
+                    unique: true,
                 }],
                 courseLeader: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "CourseLeader",
-                    required: true
+                    ref: "Tutor",
                 },
                 modules: [{
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Modules",
-                    required: true
+                    unique: true
                 }]
             }
         )

@@ -15,17 +15,19 @@ module.exports = mongoose => {
                 students: [{
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Student",
-                    required: true
                 }],
+                type: {
+                    type: String,
+                    enum: ['Lecture', 'Tutorial'],
+                    default: 'Tutorial'
+                },
                 tutorRef: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Tutor",
-                    required: true
                 },
                 register: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Register",
-                    required: true
                 }
             }
         )

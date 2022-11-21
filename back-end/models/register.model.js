@@ -1,6 +1,6 @@
 module.exports = mongoose => {
-    var AcademicAdvisor = mongoose.model(
-        "academicAdvisor",
+    var Register = mongoose.model(
+        "register",
         mongoose.Schema(
             {
                 dateTime: {
@@ -8,17 +8,11 @@ module.exports = mongoose => {
                     required: true,
                 },
                 attendanceList: [{
-                    students: {
-                        type: mongoose.Schema.Types.ObjectId,
-                        ref: "Student",
-                        unique: true
-                    },
-                    attendanceStatus: {
-                        type: Boolean,
-                    }
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "RegisterItem",
                 }]
             }
         )
     );
-    return AcademicAdvisor;
+    return Register;
 };
