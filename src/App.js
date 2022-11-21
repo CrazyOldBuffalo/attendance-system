@@ -1,25 +1,19 @@
 import Login from './Components/Auth/Login'
 import Home from './Components/Home'
-<<<<<<< HEAD
 import HomeStudent from './Components/HomeStudent'
 import RegisterAttendance from './Components/RegisterAttendance'
 import SearchForAttendanceRegister from './Components/SearchForAttendanceRegister'
 import ViewAttendance from './Components/ViewAttendance'
 import SeachForAStudent from './Components/SearchForAStudent'
 import LoginScreen from './Components/LoginScreen'
-//import './resources/styles/App.scss';
-import { BrowserRouter as Router, Routes, Route,NavLink,Link, useNavigate} from 'react-router-dom';
-=======
 import './resources/styles/App.scss';
-import { BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-router-dom';
->>>>>>> master
+import { BrowserRouter as Router, Routes, Route,NavLink,Link, useNavigate} from 'react-router-dom';
 import PrivateRoute from './Components/Auth/PrivateRoute';
 import Navbar from './Components/Navbar'
 
 import User from './Components/User'
 
 function App() {
-<<<<<<< HEAD
 
   let component
 
@@ -67,8 +61,7 @@ function App() {
 
     ) 
  
-  
-=======
+ 
   return (
     <div className="App">
 
@@ -86,6 +79,5 @@ function App() {
       
     </div>
   );
->>>>>>> master
 }
 export default App;
