@@ -6,11 +6,12 @@ import SearchForAttendanceRegister from './Components/SearchForAttendanceRegiste
 import ViewAttendance from './Components/ViewAttendance'
 import SeachForAStudent from './Components/SearchForAStudent'
 import LoginScreen from './Components/LoginScreen'
-//import './resources/styles/App.scss';
+import './resources/styles/App.scss';
 import { BrowserRouter as Router, Routes, Route,NavLink,Link, useNavigate} from 'react-router-dom';
 import PrivateRoute from './Components/Auth/PrivateRoute';
 import Navbar from './Components/Navbar'
 
+import User from './Components/User'
 
 function App() {
 
@@ -60,6 +61,23 @@ function App() {
 
     ) 
  
-  
+ 
+  return (
+    <div className="App">
+
+      <h1>App</h1>
+      <User />
+
+      <Router>
+        <Routes>
+          <Route path='/Login' element={<Login/>} /> 
+          <Route path='/Home' element={<Home/>} />
+        </Routes>
+        <Link to={"/Home"}> Home</Link>
+      </Router>
+
+      
+    </div>
+  );
 }
 export default App;

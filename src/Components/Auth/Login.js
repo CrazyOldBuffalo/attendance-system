@@ -17,6 +17,11 @@ export default function Login() {
                     <Form.Control type="password" className="form-control" size="lg"/>
                 </Form.Group>
                 <Button type="Submit" variant="primary" size="lg">Submit</Button>
+
+                <div className="Display-User-Data">
+                    <h1> User Data </h1>
+                    
+                </div>
             </Form>
         </div>
     )
