@@ -8,14 +8,8 @@ module.exports = mongoose => {
                     required: true,
                 },
                 attendanceList: [{
-                    students: {
-                        type: mongoose.Schema.Types.ObjectId,
-                        ref: "Student",
-                        unique: true
-                    },
-                    attendanceStatus: {
-                        type: Boolean,
-                    }
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "RegisterItem",
                 }]
             }
         )

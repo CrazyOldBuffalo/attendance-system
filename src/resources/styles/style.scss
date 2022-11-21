@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body{
+    margin:0;
+}
+
+.nav{
+    background-color:  darkcyan;
+    color:white;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    //padding:0 1rem;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.site-title{
+    font-size:2rem;
+    align-self: center;
+    padding-left: 25px;
+
+}
+.site-logo{
+    visibility: hidden;
+}
+.nav ul{
+    padding:0;
+    margin:0;
+    list-style: none;
+    display:flex;
+    gap: 1rem;
+}
+.nav a{
+    color:inherit;
+    text-decoration:none ;
+    height: 100%;
+  //  display: flex;
+    align-items: center;
+    padding:.25rem;
+    
+}
+
+.nav li.active{
+    background-color: pink;
+
+    
+}
+.nav li:hover{
+    background-color: black;
+    height: 100%;
+    
+    border-radius: 5px;
+    cursor: pointer;
+    
+    
+}
+
+
+
+@media (max-width: 1100px) {
+
+    .site-logo{
+        visibility: visible;
+        padding:5px
+    }
+    .site-title{
+        visibility: hidden;
+        position: absolute
+    }
+}
+
+.op-modal{   
+    width:100%;
+    height: 96%;
+    background-color:rgba(0,0,0,0.9);
+    position: absolute;
+    bottom:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+.opmodal-content {
+
+    width: 600px;
+    height: 700px;
+    background-color: white;
+    border-radius: 7px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+table, th, td {
+    border: 1px solid black;
+    height: 60px;
+     margin: auto;
+  width: 60%;
+  border: 3px solid black;
+  padding: 10px;
+  padding-left: 50px;
+  padding-right:60px;
+  
+  
+    
+}
+th, td {
+    background-color: lightgrey;
+  }
+
+.textEntryArea{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width:100%;
+    padding-top: 30px;
+
+}
+.individualEntryBox{
+    padding-bottom: 10px;
+}
+.attendanceStatusText{
+    padding-top: 20px;
+}
+.checkDetailsButton{
+    font-weight: bold;
+}
+.presentButton{
+    background-color: lightgreen;
+    border-color: black;
+}
+.absentButton{
+    background-color: lightcoral;
+    border-color: black;
+    
+}
+
+.button-54 {
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    background-color: lightcoral;
+    cursor: pointer;
+    border: 3px solid;
+    
+    padding-right: 0px;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+  }
+  
+  .button-54:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+  }
+  
+.extraPad{
+
+    padding-right: 20px;
+
+    background-color: darkcyan;
+
+}
+  
+.logOutimg{
+
+    box-shadow: 5px;
+    width: 25px;
+    padding-bottom: 7px;
+    padding-left: 5px ;
+
+}
+
+//   @media (min-width: 768px) {
+//     .button-54 {
+//       padding: 0.25em 0.75em;
+//     }
+//   }

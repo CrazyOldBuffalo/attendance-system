@@ -3,7 +3,7 @@ module.exports = mongoose => {
         "tutor",
         mongoose.Schema(
             {
-                tutorId: {
+                tutorID: {
                     type: String,
                     required: true,
                     unique: true
@@ -13,6 +13,10 @@ module.exports = mongoose => {
                     ref: "User",
                     required: true
                 },
+                modules: [{
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Module"
+                }]
             }
         )
     );

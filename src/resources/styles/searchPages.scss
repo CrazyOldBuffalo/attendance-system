@@ -1,0 +1,21 @@
+.sfs-modal{   
+    width:100%;
+    height: 96%;
+    background-color:rgba(0,0,0,0.9);
+    position: absolute;
+    bottom:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+.sfs-content {
+
+    width: 600px;
+    height: 400px;
+    background-color: white;
+    border-radius: 7px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
