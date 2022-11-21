@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-rout
 import PrivateRoute from './Components/Auth/PrivateRoute';
 import Navbar from './Components/Navbar'
 
+import User from './Components/User'
 
 function App() {
 <<<<<<< HEAD
@@ -72,6 +73,8 @@ function App() {
     <div className="App">
 
       <h1>App</h1>
+      <User />
+
       <Router>
         <Routes>
           <Route path='/Login' element={<Login/>} /> 
@@ -79,6 +82,8 @@ function App() {
         </Routes>
         <Link to={"/Home"}> Home</Link>
       </Router>
+
+      
     </div>
   );
 >>>>>>> master
