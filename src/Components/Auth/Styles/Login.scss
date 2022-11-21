@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 
+
 .login-wrapper {
 
     .mb-3 {
@@ -10,3 +11,83 @@
     flex-direction: column;
     align-items: center;
 }
+
+.li-modal{   
+    width:100%;
+    height: 100%;
+    background-color:rgba(0,0,0,0.95);
+    position: absolute;
+    bottom:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+.limodal-content {
+
+    width: 600px;
+    height: 700px;
+    background-color: white;
+    border-radius: 7px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+.loginText{
+    padding-top: 5px;
+    padding-bottom: 30px;
+    letter-spacing: 3px;
+}
+
+.area{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width:100%;
+  //  padding-top: 30px;
+}
+
+.unContainer{
+    padding-bottom: 20px;
+}
+
+.button-54 {
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    background-color: lightgreen;
+    cursor: pointer;
+    border: 3px solid;
+    padding-right: 0px;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+  }
+  
+  .button-54:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+  }
+.extraPadding{
+    padding-top: 20px;
+
+        padding-right: 20px;
+    
+        background-color: transparent;
+    
+    
+  }
+
+  .cont{
+    width: 25px;
+    padding-bottom: 5px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
