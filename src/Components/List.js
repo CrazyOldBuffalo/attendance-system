@@ -12,7 +12,7 @@ class List extends React.Component {
     }
   
     componentDidMount() {
-      axios.get("http://localhost:5000/User/All")
+      axios.get("http://localhost:5001/User/All")
         .then(
           (result) => {
             this.setState({
@@ -20,9 +20,6 @@ class List extends React.Component {
               items: result.data
             });
           },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
           (error) => {
             this.setState({
               isLoaded: true,

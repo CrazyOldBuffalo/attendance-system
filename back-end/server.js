@@ -175,7 +175,7 @@ async function createUsers() {
 
 // listen for requests
 app.listen(db.port, () => {
-  createUsers();
+  //createUsers();
   
   console.log(`Server is running on port ${db.port}.`);
 });

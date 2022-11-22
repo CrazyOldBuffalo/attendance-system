@@ -28,8 +28,8 @@ exports.findAllStudents = (req, res) => {
 };
 
 exports.findOneStudent = (req, res) => {
-    Student.findOne({ studentID: req.params.id }).populate({ path: "userRef", model: "user" }).then(data => {
-        if (!data) { return err => errors.error404(err, res) }
+    Student.findOne({ studentID: req.params.id }).populate({ path: "userRef", model: "user" }).then((data) => {
+        if (!data) { errors.error404("Could not find user", res) }
         else {
             res.send(data);
         }
