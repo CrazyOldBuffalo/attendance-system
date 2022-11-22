@@ -5,6 +5,6 @@ module.exports = app => {
 
     router.post("/Register/Add/:id", registerController.addRegisterItem);
     router.delete("/Register/DeleteItem/:id", registerController.deleteRegisterItem);
-    router.put("/Register/DeleteItem/:id", registerController.editRegisterItem);
+    router.put("/Register/EditItem/:id", registerController.editRegisterItem);
     app.use("/", router);
 }
