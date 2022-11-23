@@ -22,6 +22,13 @@ exports.findRegister = async (req, res) => {
     return registertest;
 };
 
+
+exports.getAll = (req, res) => {
+    Register.find().then(data => {
+        res.send(data);
+    });
+};
+
 exports.addRegisterItem = async(req, res) => {
     const classdata = await classController.extendsClassFind(req, res);
     const register = await Register.findById(classdata.register._id);

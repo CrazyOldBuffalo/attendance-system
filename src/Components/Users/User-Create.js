@@ -8,12 +8,14 @@ export default class CreateUser extends React.Component {
     constructor(props) {
         super(props);
         this.newUser = this.newUser.bind(this);
-        this.userChanged = this.userChanged.bind(this);
+        this.changeuser = this.changeuser.bind(this);
+        this.changepassword = this.changepassword.bind(this);
+        this.changeemail = this.changeemail.bind(this);
+        this.changetel = this.changetel.bind(this);
         this.saveUser = this.saveUser.bind(this);
         this.newUser = this.newUser.bind(this);
 
         this.state = {
-            id: null,
             username: "",
             password: "",
             email: "",
@@ -25,19 +27,30 @@ export default class CreateUser extends React.Component {
         };
     }
 
-    userChanged(event) {
-        this.setState({ value: event.target.value });
-        event.preventDefault();
+    changeuser(event) {
+        this.setState({ username: event.target.value });
+    }
+
+    changepassword(event) {
+        this.setState({password: event.target.value});
+    }
+
+    changeemail(event) {
+        this.setState({email: event.target.value});
+    }
+
+    changetel(event) {
+        this.setState({telephone: event.target.value});
     }
 
     saveUser() {
         var data = {
             username: this.state.username,
             password: this.state.password,
-            email: this.state.password,
+            email: this.state.email,
             telephone: this.state.telephone,
-            canEditCourse: this.state.canEditCourse,
-            canEditModule: this.state.canEditModule
+            canEditCourse: false,
+            canEditModule: false
         };
 
         userService.create(data).then(response => {
@@ -46,8 +59,8 @@ export default class CreateUser extends React.Component {
                 username: response.data.username,
                 email: response.data.email,
                 telephone: response.data.email,
-                canEditCourse: response.data.canEditCourse,
-                canEditModule: response.data.canEditModule,
+                canEditCourse: false,
+                canEditModule: false,
 
                 submitted: true
             });
@@ -80,35 +93,30 @@ export default class CreateUser extends React.Component {
                     </div>
                 ) : (
                     <div className="userform">
-                        <Form>
+                        <Form method="post">
                             <h2>Create User</h2>
                             <Form.Group>
                                 <FormLabel htmlFor="username">username: </FormLabel>
-                                <Form.Control type="text" className="form-control" placeholder="username"/>
+                                <Form.Control name="username" type="text" className="form-control" placeholder="username" value={this.state.username} onChange={this.changeuser}/>
                             </Form.Group>
                             <Form.Group>
                                 <FormLabel htmlFor="password">password: </FormLabel>
-                                <Form.Control type="password" className="form-control" placeholder="******"/>
+                                <Form.Control name="password" type="password" className="form-control" placeholder="******" value={this.state.password} onChange={this.changepassword}/>
                             </Form.Group>
                             <Form.Group>
                                 <FormLabel htmlFor="email">Email: </FormLabel>
-                                <Form.Control type="text" className="form-control" placeholder="email@emai.com" />
+                                <Form.Control name="email" type="text" className="form-control" placeholder="email@email.com" value={this.state.email} onChange={this.changeemail}/>
                             </Form.Group>
                             <Form.Group>
                                 <FormLabel htmlFor="telephone">telephone: </FormLabel>
-                                <Form.Control type="text" className="form-control" placeholder="01010101" />
+                                <Form.Control name="telephone" type="text" className="form-control" placeholder="01010101" value={this.state.telephone} onChange={this.changetel}/>
                             </Form.Group>
-                            <Form.Group>
-
-                            </Form.Group>
-                            <Form.Group>
-                                
-                            </Form.Group>
+                            <Button onClick={this.saveUser} className="btn btn-primary">Submit</Button>
                         </Form>
                     </div>
                 )}
 
             </div>
-        )
+        );
     }
 };

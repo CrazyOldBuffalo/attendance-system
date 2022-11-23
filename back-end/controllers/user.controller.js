@@ -11,7 +11,7 @@ exports.createUser = (req, res) => {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    telephone: req.body.tel ? req.body.tel : "0",
+    telephone: req.body.tel,
     canEditModule: false,
     canEditCourse: false
   });
@@ -19,7 +19,7 @@ exports.createUser = (req, res) => {
   user.save(user)
     .then(data => {
       res.send(data);
-    }).catch(err => errors.error500(err, res));
+    }).catch(errors.error500("Error", res));
 };
 
 // Retrieve all Tutorials from the database.

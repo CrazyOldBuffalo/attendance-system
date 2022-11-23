@@ -1,4 +1,4 @@
-import http from "../http-Common";
+import http from "../http-common";
 
 class UserDataService {
     getAll() {
@@ -13,7 +13,7 @@ class UserDataService {
         return http.put(`/User/Update/${id}`, data);
     }
 
-    create(id, data) {
+    create(data) {
         return http.post("/User/Create", data);
     }
 }
