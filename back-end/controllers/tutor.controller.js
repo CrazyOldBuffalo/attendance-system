@@ -8,7 +8,7 @@ exports.createTutor = async (req, res) => {
     if (!req.body) { return errors.error400(err, res); };
 
     const user = await UserController.ExtendsUserCreate(req, res);
-    if(!user) {return err => errors.error500(err, res)};
+    if(!user) {return errors.error500("", res)};
     const tutor = new Tutor({
         tutorID: req.body.tutorid,
         userRef: user

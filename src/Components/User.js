@@ -1,63 +1,66 @@
 import React from "react";
+import axios from "axios";
+import test from "../Services/user.service";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { FormGroup } from "react-bootstrap";
 
-export default class User extends React.Component
-{
-    constructor(props)
-    {
+export default class User extends React.Component {
+    constructor(props) {
         super(props);
-        
-        // set User attributes to default values.
-        this.state = { username: "", password: "", email: "", telephoneNo: "", canEditModule: false, canEditCourse: false };
+        this.state = {
+            searched: false,
+            fetchedUser: {},
+            value: ""
+        };
+        this.userChanged = this.userChanged.bind(this);
+        this.searchForUser = this.searchForUser.bind(this);
+    };
+
+    userChanged(event) {
+        this.setState({ value: event.target.value });
+        event.preventDefault();
+    };
+
+    searchForUser(event) {
+        test.get(this.state.value)
+            .then(
+                (result) => {
+                    this.setState({
+                        searched: true,
+                        fetchedUser: result.data
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        searched: false,
+                        fetchedUser: {}
+                    });
+                },
+            )
+        this.setState({ searchedForUser: this.state.value });
+        event.preventDefault();
     }
 
     // required function in Class.
-    render()
-    {
+    render() {
         return (
-            <div>
-                <h1> {this.state.username} 's details </h1>
-                <p> password: {this.state.password} </p>
-                <p> email: {this.state.email} </p>
-                <p> telephoneNo. {this.state.telephoneNo} </p>
-                <p> canEditModule {this.state.canEditModule} </p>
-                <p> canEditModule {this.state.canEditCourse} </p>
+            <div className="UserSearch">
+                <div className="UserSearchForm">
+                    <Form onSubmit={this.searchForUser}>
+                        <h1>User Search</h1>
+                        <FormGroup>
+                            <Form.Label htmlFor="username">Username: </Form.Label>
+                            <Form.Control type="text" className="form-control" placeholder="username" value={this.state.value} onChange={this.userChanged} />
+                        </FormGroup>
+                        <Button type="submit">Search</Button>
+                    </Form>
+                </div>
+                <div className="UserSearchResults">
+                    {this.state.searched && this.state.fetchedUser.username}
+                </div>
             </div>
+
         )
-    }
-
-    setUsername = (username) => {
-        this.setState().username = username;
-    }
-
-    setPassword = (password) => {
-        this.setState().password = password;
-    }
-
-    setEmail = (email) => {
-        this.setState().email = email;
-    }
-
-    setTelephoneNo = (telephoneNo) => {
-        this.setState().telephoneNo = telephoneNo;
-    }
-
-    getUsername = () => {
-        return this.username;
-    }
-
-    getPassword = () => {
-        return this.password;
-    }
-
-    getEmail = () => {
-        return this.email;
-    }
-
-    getTelephoneNo = () => {
-        return this.telephoneNo;
-    }
-
-    getUser = () => {
-        return this.User;
     }
 }
