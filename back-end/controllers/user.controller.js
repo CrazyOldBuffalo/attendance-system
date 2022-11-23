@@ -11,15 +11,12 @@ exports.createUser = (req, res) => {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    telephone: req.body.tel,
+    telephone: req.body.telephone,
     canEditModule: false,
     canEditCourse: false
   });
 
-  user.save(user)
-    .then(data => {
-      res.send(data);
-    }).catch(errors.error500("Error", res));
+  user.save(user).then(data => {res.send(data)});
 };
 
 // Retrieve all Tutorials from the database.

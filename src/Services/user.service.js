@@ -1,3 +1,4 @@
+import axios from "axios";
 import http from "../http-common";
 
 class UserDataService {
@@ -14,8 +15,10 @@ class UserDataService {
     }
 
     create(data) {
-        return http.post("/User/Create", data);
+        return http.post(`/User/Create`, data);
+        //return http.post('/User/Create', data);
+        // DOESN't WORK FOR NO REASON ^ Data is not being send in the body
     }
 }
 
-export default new UserDataService();
+export default new UserDataService;

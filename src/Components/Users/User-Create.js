@@ -3,11 +3,11 @@ import userService from "../../Services/user.service";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormLabel from "react-bootstrap/esm/FormLabel";
+import axios from "axios";
 
 export default class CreateUser extends React.Component {
     constructor(props) {
         super(props);
-        this.newUser = this.newUser.bind(this);
         this.changeuser = this.changeuser.bind(this);
         this.changepassword = this.changepassword.bind(this);
         this.changeemail = this.changeemail.bind(this);
@@ -44,33 +44,21 @@ export default class CreateUser extends React.Component {
     }
 
     saveUser() {
-        var data = {
+        const data = {
             username: this.state.username,
             password: this.state.password,
             email: this.state.email,
             telephone: this.state.telephone,
-            canEditCourse: false,
-            canEditModule: false
         };
-
-        userService.create(data).then(response => {
-            this.setState({
-                id: response.data.id,
-                username: response.data.username,
-                email: response.data.email,
-                telephone: response.data.email,
-                canEditCourse: false,
-                canEditModule: false,
-
-                submitted: true
-            });
+        console.log(data);
+        userService.create(data);
+        axios.post("http://localhost:5000/User/Create", data).then(response => {
             console.log(response.data);
-        }).catch(e => { console.log(e) });
+        }).catch(e => {console.log(e)});
     }
 
     newUser() {
         this.setState({
-            id: null,
             username: "",
             password: "",
             email: "",
