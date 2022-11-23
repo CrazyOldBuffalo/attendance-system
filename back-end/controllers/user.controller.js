@@ -25,7 +25,7 @@ exports.createUser = (req, res) => {
 // Retrieve all Tutorials from the database.
 exports.findOneUser = (req, res) => {
   const findUser = req.params.id;
-  User.find({ username: findUser }).then(data => {
+  User.find({ studentID: findUser }).then(data => {
     if (!data) { err => errors.error404(err, res) }
     else {
       res.send(data);
