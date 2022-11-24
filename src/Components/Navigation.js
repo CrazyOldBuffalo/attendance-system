@@ -8,6 +8,7 @@ import CreateUser from "./Users/User-Create";
 import Home from "../Components/Home";
 import Login from "../Components/Auth/Login";
 import ModuleList from  "./Module/Module-List";
+import ClassList from "./Class/Class-List";
 
 export default function Navigation() {
     return (
@@ -22,6 +23,7 @@ export default function Navigation() {
                             <Link className="nav-link" to="/Home">Home</Link>
                             <Link className="nav-link" to="/User/Create">User</Link>
                             <Link className="nav-link" to="/Module/List">Module</Link>
+                            <Link className="nav-link" to="/Class/List">Class</Link>
                         </Nav>
                     </Container>
                 </Navbar>
@@ -30,6 +32,7 @@ export default function Navigation() {
                     <Route path="/Home" element={<Home />} />
                     <Route path="/User/Create" element={<CreateUser />}/>
                     <Route path="/Module/List" element={<ModuleList />}/>
+                    <Route path="/Class/List" element={<ClassList/>}/>
                 </Routes>
             </Router>
         </div>

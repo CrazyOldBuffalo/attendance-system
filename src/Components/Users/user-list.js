@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import userService from "../../Services/user.service";
+import React from "react";
 
 export default class UserList extends React.Component {
     constructor(props) {

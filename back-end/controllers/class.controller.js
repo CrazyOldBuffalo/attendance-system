@@ -24,11 +24,11 @@ exports.createClass = async (req,res) => {
 
 exports.findAllClasses = (req, res) => {
     Class1.find().populate({path: "students", model:"student"})
-    .populate({path: "tutor", model: "tutor"})
+    .populate({path: "tutorRef", model: "tutor"})
     .populate({path: "register", model: "register"})
-    .then(data=> {
+    .then(data => {
         res.send(data);
-    }).catch(err => errors.error500(err, res));
+    });  
 };
 
 exports.findOneClass = (req,res) => {

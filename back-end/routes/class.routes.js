@@ -6,5 +6,7 @@ module.exports = app => {
 
     router.post("/Class/Create", classController.createClass);
     router.put("/Class/Students/:id", classController.addStudent);
+    router.get("/Class/All/", classController.findAllClasses);
+    router.get(`/Class/Find/:id}`, classController.findOneClass);
     app.use("/", router);
 }
