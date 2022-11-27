@@ -8,6 +8,7 @@ import SeachForAStudent from './Components/SearchForAStudent'
 import LoginScreen from './Components/LoginScreen'
 import './resources/styles/App.scss';
 import List from "./Components/List";
+import Search from "./Components/Search";
 import { BrowserRouter as Router, Routes, Route,NavLink,Link, useNavigate} from 'react-router-dom';
 import PrivateRoute from './Components/Auth/PrivateRoute';
 import Navbar from './Components/Navbar'
@@ -52,7 +53,10 @@ function App() {
     case "/List":
       component = <List/>
       break
-
+    
+    case "/Search":
+      component = <Search/>
+      break
   }
  
 
